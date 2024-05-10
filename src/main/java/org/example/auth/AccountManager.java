@@ -72,6 +72,28 @@ public class AccountManager {
         }
     }
 
+    public boolean authenticate(String username, String password){
+        String query = "SELECT password FROM accounts WHERE username=?";
+
+        try{
+            Connection connection = dbConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()){
+                String passwordStore = resultSet.getString("password");
+
+                if(password.equals(passwordStore)){
+                    return true;
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 
 

@@ -20,6 +20,9 @@ public class Main {
         var temp = accountManager.getAccount("test");
         System.out.println(temp);
 
+        var bool = accountManager.authenticate("test", "12345");
+        System.out.println(bool);
+
         dbConnection.disconnect();
     }
 }
